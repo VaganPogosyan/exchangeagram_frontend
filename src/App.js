@@ -1,23 +1,33 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import Axios from 'axios';
+
+
 
 function App() {
+  const [caption, setCaption] = useState('');
+  const [image, setImage] = useState('');
+
+  const submitPost = () => {
+    Axios.post('http://localhost:8080/api/insert', {
+      caption: caption,
+      image: image
+    })
+  }
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Exchangeagram</h1>
+      <form>
+        <label htmlFor="caption">Caption: </label>
+        <input type="text" id="caption" onChange={(event) => setCaption(event.target.value)}></input>
+        <br />
+        <label htmlFor="image">Image</label>
+        <input type="text" id="image" onChange={(event) => setImage(event.target.value)}></input>
+        <br />
+        <button onClick={submitPost}>Click</button>
+      </form>
     </div>
   );
 }
