@@ -20,9 +20,12 @@ function App() {
       caption: caption,
       image: image
     })
+    setPostsList([...postsList, { caption: caption, image: image }])
+  };
+
+  const deletePost = (id) => {
+    Axios.delete(`http://localhost:8080/api/exchangeagram/${id}`)
   }
-
-
 
 
   return (
@@ -37,12 +40,21 @@ function App() {
         <br />
         <button onClick={submitPost}>Click</button>
       </form>
+      <div className='bigField'>
+        {postsList.map((val) => {
+          return (
 
-      {postsList.map((val) => {
-        return (
-          <h3>Caption: {val.caption} | Image: {val.image}</h3>
-        )
-      })}
+            <div className='card'>
+              <h3 key={val.post_id}>Caption: {val.caption}</h3>
+              <h4> Image: {val.image}</h4>
+              <button onClick={() => deletePost(val.post_id)}>DELETE</button>
+              <input type='text'></input>
+              <button>UPDATE</button>
+
+            </div>
+          )
+        })}
+      </div>
     </div>
   );
 }
