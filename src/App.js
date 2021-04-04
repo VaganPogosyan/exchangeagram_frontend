@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import Axios from 'axios';
 
@@ -7,13 +7,21 @@ import Axios from 'axios';
 function App() {
   const [caption, setCaption] = useState('');
   const [image, setImage] = useState('');
+  const [postsList, setPostsList] = useState([]);
+
+  useEffect(() => {
+    Axios.get('http://localhost:8080/api/exchangeagram/posts').then((response) => {
+      setPostsList(response.data);
+    })
+  })
 
   const submitPost = () => {
-    Axios.post('http://localhost:8080/api/insert', {
+    Axios.post('http://localhost:8080/api/exchangeagram/newpost', {
       caption: caption,
       image: image
     })
   }
+
 
 
 
@@ -29,6 +37,12 @@ function App() {
         <br />
         <button onClick={submitPost}>Click</button>
       </form>
+
+      {postsList.map((val) => {
+        return (
+          <h3>Caption: {val.caption} | Image: {val.image}</h3>
+        )
+      })}
     </div>
   );
 }
