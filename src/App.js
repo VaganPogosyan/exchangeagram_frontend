@@ -24,7 +24,7 @@ function App() {
         <label htmlFor="caption">Caption: </label>
         <input type="text" id="caption" onChange={(event) => setCaption(event.target.value)}></input>
         <br />
-        <label htmlFor="image">Image</label>
+        <label htmlFor="image">Image: </label>
         <input type="text" id="image" onChange={(event) => setImage(event.target.value)}></input>
         <br />
         <button onClick={submitPost}>Click</button>
