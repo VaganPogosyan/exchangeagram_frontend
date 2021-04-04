@@ -1,5 +1,22 @@
 .App {
   /* text-align: center; */
+  width: 100%;
 }
 
+.bigField {
+  min-width: 100%;
+  border: 3px solid red;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  justify-content: space-around;
 
+}
+
+.card {
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 350px;
+  height: 150px;
+  margin: 10px;
+  text-align: center;
+}
